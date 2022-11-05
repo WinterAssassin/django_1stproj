@@ -5,9 +5,5 @@ from .models import Members
 
 def index(request):
     mymembers = Members.objects.all().values()
-    # return render(request, 'members/myfirst.html')
-    output = ""
-    for x in mymembers:
-        output += x["firstname"]
-
-    return HttpResponse(output)
+    context = {'mymembers': mymembers}
+    return render(request, 'members/index.html', context=context)

@@ -22,3 +22,19 @@ def delete(request, id):
     member = Members.objects.get(id=id)
     member.delete()
     return redirect('index')
+
+def update(request, id):
+    mymember = Members.objects.get(id=id)
+    context = {
+        'mymember': mymember,
+    }
+    return render(request, 'members/update.html', context=context)
+
+def updaterecord(request, id):
+    first = request.POST['first']
+    last = request.POST['last']
+    member = Members.objects.get(id=id)
+    member.firstname = first
+    member.lastname = last
+    member.save()
+    return redirect('index')
